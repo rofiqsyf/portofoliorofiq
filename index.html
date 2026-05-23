@@ -101,7 +101,7 @@
   </button>
 
   <!-- ===================== NAV ===================== -->
-  <nav id="nav" class="fixed top-0 inset-x-0 z-[100] h-[72px] flex items-center justify-between px-8 md:px-16">
+  <nav id="nav" class="fixed top-0 inset-x-0 z-[100] h-[72px] flex items-center justify-between px-5 md:px-16">
     <a href="#hero" class="flex items-center gap-1.5 cursor-none">
       <span
         class="bg-white text-ink px-3 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase">OPIQ</span>
@@ -198,50 +198,54 @@
   <main>
     <!-- ===================== HERO ===================== -->
     <section id="hero"
-      class="relative min-h-screen bg-electric flex flex-col items-center justify-center overflow-hidden pt-20">
+      class="relative min-h-screen bg-electric flex flex-col items-center justify-center overflow-hidden pt-20 w-full">
       <div class="hero-grid absolute inset-0 pointer-events-none"></div>
       <canvas id="pc" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
 
       <!-- Floating Cards -->
+      <!-- Card 1: Top right - ROFIQ avatar -->
       <div
-        class="glass-card absolute top-[10%] md:top-[14%] right-[2%] md:right-[12%] rounded-2xl p-3 md:p-4 flex flex-col items-center gap-2 animate-float-slow pointer-events-none scale-75 md:scale-100"
+        class="glass-card absolute top-[8%] right-[3%] md:top-[14%] md:right-[12%] rounded-2xl p-2 md:p-4 flex flex-col items-center gap-1.5 md:gap-2 animate-float-slow pointer-events-none scale-[0.55] md:scale-100 origin-top-right"
         style="rotate:5deg">
         <img src="/foto/opiq_pancasila.jpg" alt="Rofiq avatar"
-          class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-white/30" />
-        <span class="text-white text-xs font-bold">ROFIQ</span>
-        <span class="text-white/50 text-[10px] font-bold uppercase tracking-widest">Undergraduate</span>
+          class="w-10 h-10 md:w-16 md:h-16 rounded-full object-cover border-2 border-white/30" />
+        <span class="text-white text-[10px] md:text-xs font-bold">ROFIQ</span>
+        <span class="text-white/50 text-[8px] md:text-[10px] font-bold uppercase tracking-widest">Undergraduate</span>
       </div>
+      <!-- Card 2: Bottom left - Ngedesain -->
       <div
-        class="glass-card absolute bottom-[15%] md:bottom-[28%] left-[2%] md:left-[10%] rounded-2xl p-2 md:p-3 flex items-center gap-2 md:gap-3 animate-float-mid pointer-events-none scale-75 md:scale-100"
+        class="glass-card absolute bottom-[12%] left-[3%] md:bottom-[28%] md:left-[10%] rounded-2xl p-2 md:p-3 flex items-center gap-2 md:gap-3 animate-float-mid pointer-events-none scale-[0.55] md:scale-100 origin-bottom-left"
         style="rotate:-3deg">
-        <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-neon flex items-center justify-center shrink-0">
-          <span class="material-symbols-outlined text-ink text-[16px] md:text-[18px]">palette</span>
+        <div class="w-7 h-7 md:w-10 md:h-10 rounded-xl bg-neon flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-ink text-[14px] md:text-[18px]">palette</span>
         </div>
         <div>
-          <div class="text-white text-xs md:text-sm font-bold leading-none">Ngedesain</div>
-          <div class="text-white/50 text-[9px] md:text-[10px] mt-0.5">TUKANG REVISI</div>
+          <div class="text-white text-[10px] md:text-sm font-bold leading-none">Ngedesain</div>
+          <div class="text-white/50 text-[8px] md:text-[10px] mt-0.5">TUKANG REVISI</div>
         </div>
       </div>
+      <!-- Card 3: Top left - Bidang Skill -->
       <div
-        class="glass-card absolute top-[20%] md:top-[32%] left-[2%] md:left-[7%] rounded-2xl px-3 md:px-4 py-2 md:py-3 animate-float-fast pointer-events-none scale-75 md:scale-100 text-center z-10"
+        class="glass-card absolute top-[18%] left-[3%] md:top-[32%] md:left-[7%] rounded-2xl px-2.5 md:px-4 py-1.5 md:py-3 animate-float-fast pointer-events-none scale-[0.55] md:scale-100 origin-top-left text-center z-10"
         style="rotate:1deg">
-        <div class="text-neon text-xl md:text-2xl font-extrabold leading-none">6+</div>
-        <div class="text-white/50 text-[9px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Bidang Skill</div>
+        <div class="text-neon text-lg md:text-2xl font-extrabold leading-none">6+</div>
+        <div class="text-white/50 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mt-0.5">Bidang Skill</div>
       </div>
+      <!-- Card 4: Middle right - Ngoding (hidden on very small, shown sm+) -->
       <div
-        class="glass-card absolute top-[48%] md:top-[55%] right-[2%] md:right-[18%] rounded-2xl px-3 md:px-4 py-2 md:py-3 animate-float-mid pointer-events-none scale-75 md:scale-100 text-left flex items-center gap-3 z-20"
+        class="glass-card absolute top-[45%] right-[3%] md:top-[55%] md:right-[18%] rounded-2xl px-2 md:px-4 py-1.5 md:py-3 animate-float-mid pointer-events-none scale-[0.55] md:scale-100 origin-right text-left flex items-center gap-2 md:gap-3 z-20"
         style="rotate:8deg">
-        <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-neon/10 flex items-center justify-center shrink-0 border border-neon/30">
-          <span class="material-symbols-outlined text-neon text-[18px] md:text-[20px]">code</span>
+        <div class="w-7 h-7 md:w-10 md:h-10 rounded-xl bg-neon/10 flex items-center justify-center shrink-0 border border-neon/30">
+          <span class="material-symbols-outlined text-neon text-[15px] md:text-[20px]">code</span>
         </div>
         <div>
-          <div class="text-white text-xs md:text-sm font-bold leading-none">Ngoding</div>
-          <div class="text-white/50 text-[9px] md:text-[10px] uppercase tracking-widest mt-1">TUKANG DEBUG</div>
+          <div class="text-white text-[10px] md:text-sm font-bold leading-none">Ngoding</div>
+          <div class="text-white/50 text-[8px] md:text-[10px] uppercase tracking-widest mt-0.5">TUKANG DEBUG</div>
         </div>
       </div>
 
       <!-- Content -->
-      <div class="relative z-10 text-center px-5 md:px-16 max-w-[1280px] mx-auto w-full">
+      <div class="relative z-10 text-center px-4 md:px-16 max-w-[1280px] mx-auto w-full">
         <div
           class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-2 mb-10 cursor-none hover:bg-white/20 transition-colors">
           <span class="w-2 h-2 rounded-full bg-neon animate-pulse-glow"></span>
@@ -257,9 +261,9 @@
             class="text-[clamp(2rem,7vw,6.5rem)] font-extrabold text-white leading-[.95] tracking-[-0.03em] block mt-1">
             SYAIFURROHMAN</div>
         </div>
-        <div class="flex items-center justify-center gap-2.5 mt-8 text-base md:text-lg">
+        <div class="flex flex-wrap items-center justify-center gap-1.5 md:gap-2.5 mt-8 text-sm md:text-base lg:text-lg">
           <span class="text-white/50 font-medium">Saya seorang</span>
-          <span id="tw" class="text-neon font-bold min-w-[190px] text-left"></span>
+          <span id="tw" class="text-neon font-bold min-w-0 text-left"></span>
           <span class="tw-cursor"></span>
         </div>
         <div class="flex flex-wrap items-center justify-center gap-4 mt-10">
@@ -296,7 +300,7 @@
     </div>
 
     <!-- ===================== SKILLS ===================== -->
-    <section id="skills" class="relative bg-surface py-[120px] px-8 md:px-16 overflow-hidden">
+    <section id="skills" class="relative bg-surface py-20 md:py-[120px] px-5 md:px-16 overflow-hidden">
       <div id="sbg" class="absolute inset-0 pointer-events-none transition-transform duration-150"
         style="background-image:linear-gradient(rgba(163,230,53,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.07) 1px,transparent 1px);background-size:40px 40px;">
       </div>
@@ -440,7 +444,7 @@
     </section>
 
     <!-- ===================== TOOLS STACK ===================== -->
-    <section id="tools" class="bg-surface-low py-20 px-8 md:px-16">
+    <section id="tools" class="bg-surface-low py-16 md:py-20 px-5 md:px-16">
       <div class="max-w-[1280px] mx-auto">
         <div class="text-center mb-12 reveal">
           <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
@@ -492,8 +496,8 @@
     </section>
 
     <!-- ===================== ABOUT ===================== -->
-    <section id="about" class="bg-surface py-[120px] px-8 md:px-16">
-      <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+    <section id="about" class="bg-surface py-20 md:py-[120px] px-5 md:px-16 overflow-hidden">
+      <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
         <div class="reveal from-l">
           <div class="inline-flex items-center gap-2 mb-5"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
               class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Tentang Saya</span></div>
@@ -529,66 +533,69 @@
             </div>
           </div>
         </div>
+        <!-- Right column: lanyard (absolute, clips naturally) + about card -->
         <div class="reveal from-r relative">
-          <!-- Lanyard 3D Physics Simulation -->
+
+          <!-- Lanyard 3D Physics Simulation — always absolute, clips via section overflow-hidden -->
           <div id="lanyard-container"
-            class="reveal absolute -top-16 md:-top-24 -right-10 md:right-4 z-30 w-64 h-[450px] pointer-events-none scale-[0.65] md:scale-100 origin-top-right">
+            class="reveal absolute z-30
+                   -top-10 -right-6 w-[150px] h-[280px]
+                   md:-top-24 md:right-4 md:w-64 md:h-[450px]"
+            style="pointer-events: none;">
             <!-- Rope Canvas -->
-            <canvas id="lanyard-canvas" class="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"></canvas>
+            <canvas id="lanyard-canvas" class="absolute top-0 left-0 w-full h-full z-20" style="pointer-events: none;"></canvas>
 
             <!-- ID Card -->
             <div id="lanyard-card"
-              class="absolute top-0 left-0 w-[110px] h-[150px] bg-white rounded-xl p-1.5 shadow-2xl border border-outline-dim pointer-events-auto cursor-none z-30 transition-shadow hover:shadow-neon"
-              style="opacity: 0;">
-              <div
-                class="w-full h-full bg-surface-low rounded-lg overflow-hidden flex flex-col relative border border-outline-dim pointer-events-none">
-                <div class="absolute top-1.5 left-1/2 -translate-x-1/2 w-5 h-1 bg-white rounded-full z-20"></div>
-                <img src="/foto/opiq_balairung.jpg" alt="Opiq Photo" class="w-full h-[100px] object-cover pt-3 px-1"
+              class="absolute top-0 left-0 w-[85px] h-[115px] md:w-[110px] md:h-[150px] bg-white rounded-xl p-1.5 shadow-2xl border border-outline-dim z-30 transition-shadow hover:shadow-neon active:shadow-neon"
+              style="opacity: 0; pointer-events: auto; touch-action: none;">
+              <div class="w-full h-full bg-surface-low rounded-lg overflow-hidden flex flex-col relative border border-outline-dim" style="pointer-events: none;">
+                <div class="absolute top-1.5 left-1/2 -translate-x-1/2 w-4 h-0.5 md:w-5 md:h-1 bg-white rounded-full z-20"></div>
+                <img src="/foto/opiq_balairung.jpg" alt="Opiq Photo" class="w-full h-[75px] md:h-[100px] object-cover pt-3 px-1"
                   style="filter: grayscale(100%); pointer-events: none;">
                 <div class="flex-1 bg-electric text-center flex items-center justify-center mt-1 rounded-b-sm">
-                  <span class="text-white text-[9px] font-extrabold tracking-widest uppercase">OPIQ.</span>
+                  <span class="text-white text-[7px] md:text-[9px] font-extrabold tracking-widest uppercase">OPIQ.</span>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- About card -->
           <div class="about-card-inner bg-white rounded-3xl p-6 md:p-10 shadow-ambient relative overflow-hidden">
             <div class="absolute -top-14 -right-14 w-44 h-44 bg-electric/5 rounded-full"></div>
             <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-neon/10 rounded-full blur-2xl"></div>
-            <div
-              class="inline-flex items-center gap-2 bg-surface-low border border-outline-dim rounded-full px-4 py-2 mb-6 relative">
+            <div class="inline-flex items-center gap-2 bg-surface-low border border-outline-dim rounded-full px-4 py-2 mb-6 relative">
               <span class="w-2 h-2 rounded-full bg-neon animate-pulse-glow"></span>
               <span class="text-ink text-xs font-bold tracking-widest uppercase">Open to Collaboration</span>
             </div>
             <h3 class="text-2xl md:text-3xl font-extrabold text-ink leading-tight mb-4 relative">
               Halo! Nama saya<br>
               <span class="text-electric relative inline-block group cursor-none">Rofiq Syaifurrohman
-                <span
-                  class="absolute bottom-0 left-0 right-0 h-1 bg-neon rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+                <span class="absolute bottom-0 left-0 right-0 h-1 bg-neon rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </span>
             </h3>
             <p class="text-on-muted text-sm leading-relaxed mb-4 relative">Mahasiswa semester 4 Teknik Informatika.
               Fokus pada Web Development, UI/UX Design, dan Analisa Data. Selalu berusaha
               memberikan solusi digital yang terbaik.</p>
-            <div
-              class="inline-flex items-center gap-1.5 bg-neon/15 text-green-700 rounded-full px-4 py-1.5 text-xs font-bold">
+            <div class="inline-flex items-center gap-1.5 bg-neon/15 text-green-700 rounded-full px-4 py-1.5 text-xs font-bold">
               <span class="material-symbols-outlined text-[14px]">star</span>Teknik Informatika — Universitas Sains
               Al-Qur'an
             </div>
           </div>
+
         </div>
       </div>
     </section>
 
     <!-- ===================== ACHIEVEMENTS ===================== -->
-    <section id="achievement" class="bg-surface-low py-[100px] px-8 md:px-16">
+    <section id="achievement" class="bg-surface-low py-16 md:py-[100px] px-0 md:px-16">
       <div class="max-w-[1280px] mx-auto">
         <div class="text-center mb-14 reveal">
           <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
               class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Prestasi</span></div>
           <h2 class="text-3xl md:text-4xl font-extrabold text-ink tracking-tight">Pencapaian Saya</h2>
         </div>
-        <div class="overflow-hidden cursor-grab py-12 -mx-8 px-8 md:-mx-16 md:px-16" id="achieve-wrapper">
+        <div class="overflow-hidden cursor-grab py-8 md:py-12 -mx-0 px-5 md:-mx-16 md:px-16" id="achieve-wrapper">
           <div class="flex gap-3 md:gap-4 w-max" id="achieve-track">
             <!-- Card 1 -->
             <div class="achieve-card tilt reveal d1 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
@@ -641,7 +648,7 @@
     </section>
 
     <!-- ===================== EDUCATION TIMELINE ===================== -->
-    <section id="pengalaman" class="relative grad-pengalaman py-[120px] px-8 md:px-16 overflow-hidden">
+    <section id="pengalaman" class="relative grad-pengalaman py-20 md:py-[120px] px-5 md:px-16 overflow-hidden">
       <div class="hero-grid absolute inset-0 opacity-[.06] pointer-events-none"></div>
       <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none">
       </div>
@@ -696,7 +703,7 @@
     </section>
 
     <!-- ===================== PORTFOLIO ===================== -->
-    <section id="portfolio" class="grad-portfolio py-[120px] px-8 md:px-16">
+    <section id="portfolio" class="grad-portfolio py-20 md:py-[120px] px-5 md:px-16">
       <div class="max-w-[1280px] mx-auto">
         <div class="text-center mb-12 reveal">
           <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
@@ -760,7 +767,7 @@
     </section>
 
     <!-- ===================== CONTACT ===================== -->
-    <section id="kontak" class="relative bg-ink py-[120px] px-8 md:px-16 overflow-hidden">
+    <section id="kontak" class="relative bg-ink py-20 md:py-[120px] px-5 md:px-16 overflow-hidden">
       <div class="absolute inset-0 pointer-events-none"
         style="background-image:linear-gradient(rgba(163,230,53,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.04) 1px,transparent 1px);background-size:40px 40px; mask-image: linear-gradient(to bottom, transparent, black 15%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);">
       </div>
@@ -770,7 +777,7 @@
       <div
         class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-neon/7 rounded-full blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/3">
       </div>
-      <div class="max-w-[1280px] mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div class="max-w-[1280px] mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
         <div class="reveal from-l">
           <div class="inline-flex items-center gap-2 mb-5"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
               class="text-white/50 text-xs font-bold tracking-[.12em] uppercase">Hubungi Saya</span></div>
@@ -863,7 +870,7 @@
   </main>
 
   <!-- ===================== FOOTER ===================== -->
-  <footer class="bg-ink border-t border-white/6 py-8 px-8 md:px-16">
+  <footer class="bg-ink border-t border-white/6 py-8 px-5 md:px-16">
     <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 flex-wrap">
       <a href="#hero"
         class="text-white text-2xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">OPIQ.</a>
