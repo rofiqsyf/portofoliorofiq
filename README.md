@@ -38,7 +38,7 @@
 ### 🖼️ Preview Website Portofolio
 
 <p align="center">
-  <img src="https://drive.google.com/file/d/1PHBgpOHhqGWrGoxCfuHpePxBU1Umujv2/view?usp=sharing" alt="Preview Web Portofolio" width="80%">
+  <img src="https://github.com/rofiqsyf/portofoliorofiq/blob/main/preview_portofoliowebsite.png" alt="Preview Web Portofolio" width="80%">
 </p>
 
 ---
