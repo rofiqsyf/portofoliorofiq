@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" data-theme="light">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPIQ. — Rofiq Syaifurrohman | Frontend & UI/UX Developer</title>
+  <meta name="description"
+    content="Portfolio interaktif Rofiq Syaifurrohman — mahasiswa Teknik Informatika, Frontend Developer, UI/UX Designer, dan Network Enthusiast dari Wonosobo, Jawa Tengah." />
+  <meta name="keywords" content="Rofiq Syaifurrohman, portfolio, frontend developer, UI/UX, Wonosobo, UNSIQ" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            electric: '#0040FF', 'electric-deep': '#002BB3',
+            neon: '#A3E635', 'neon-dim': '#98DA27',
+            ink: '#0A0A0A', 'ink-soft': '#111827',
+            surface: '#f9f9f9', 'surface-low': '#f3f3f4',
+            'surface-mid': '#eeeeee', 'surface-high': '#e8e8e8',
+            'on-surface': '#1a1c1c', 'on-muted': '#434657',
+            outline: '#747689', 'outline-dim': '#c4c5da',
+            'dark-bg': '#0d0d0f', 'dark-card': '#161618', 'dark-border': '#2a2a2e',
+          },
+          animation: {
+            'float-slow': 'floatY 7s ease-in-out infinite',
+            'float-mid': 'floatY 5.5s ease-in-out infinite 0.8s',
+            'float-fast': 'floatY 4.5s ease-in-out infinite 1.6s',
+            'pulse-glow': 'pulseGlow 2.5s ease-in-out infinite',
+            'marquee': 'marquee 28s linear infinite',
+            'spin-slow': 'spin 8s linear infinite',
+            'tilt-in': 'tiltIn .3s ease',
+          },
+          keyframes: {
+            floatY: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-14px)' } },
+            pulseGlow: { '0%,100%': { opacity: '1', transform: 'scale(1)' }, '50%': { opacity: '0.4', transform: 'scale(0.75)' } },
+            marquee: { '0%': { transform: 'translateX(0)' }, '100%': { transform: 'translateX(-50%)' } },
+            tiltIn: { '0%': { opacity: '0', transform: 'scale(.96) translateY(10px)' }, '100%': { opacity: '1', transform: 'scale(1) translateY(0)' } },
+          },
+          boxShadow: {
+            neon: '0 0 20px rgba(163,230,53,0.5)',
+            'neon-lg': '0 0 40px rgba(163,230,53,0.65)',
+            electric: '0 0 30px rgba(0,64,255,0.4)',
+            ambient: '0 12px 48px -8px rgba(0,64,255,0.13)',
+            'ambient-dark': '0 12px 48px -8px rgba(0,0,0,0.5)',
+          },
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="font-sans">
+
+  <!-- CURSOR -->
+  <div id="cur"></div>
+  <div id="cur-ring"></div>
+
+  <!-- SCROLL PROGRESS -->
+  <div id="prog"></div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="text-center">
+      <div class="text-6xl font-extrabold text-white tracking-tight leading-none">OPIQ<span class="text-neon">.</span>
+      </div>
+      <p class="text-white/40 text-xs tracking-[.15em] uppercase mt-3">Welcome to my world...</p>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <button id="lb-close" onclick="closeLB()"><span
+        class="material-symbols-outlined text-white text-xl">close</span></button>
+    <img id="lb-img" src="" alt="" />
+    <div id="lb-info">
+      <h4 id="lb-title"></h4>
+      <p id="lb-desc"></p>
+    </div>
+  </div>
+
+  <!-- BACK TO TOP -->
+  <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Kembali ke atas"
+    class="fixed bottom-8 right-8 z-[90] w-12 h-12 bg-neon rounded-full flex items-center justify-center shadow-neon hover:bg-white hover:shadow-lg transition-all cursor-none">
+    <span class="material-symbols-outlined text-ink text-xl">arrow_upward</span>
+  </button>
+
+  <!-- ===================== NAV ===================== -->
+  <nav id="nav" class="fixed top-0 inset-x-0 z-[100] h-[72px] flex items-center justify-between px-8 md:px-16">
+    <a href="#hero" class="flex items-center gap-1.5 cursor-none">
+      <span
+        class="bg-white text-ink px-3 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase">OPIQ</span>
+      <span class="bg-neon text-ink px-3 py-1 rounded-full text-xs font-extrabold tracking-widest uppercase">.</span>
+    </a>
+    <ul class="hidden md:flex items-center gap-9">
+      <li><a href="#hero"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Beranda</a>
+      </li>
+      <li><a href="#about"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Tentang
+          Saya</a>
+      </li>
+      <li><a href="#skills"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Skills</a>
+      </li>
+      <li><a href="#portfolio"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Portofolio</a>
+      </li>
+      <li><a href="#pengalaman"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Pendidikan</a>
+      </li>
+      <li><a href="#kontak"
+          class="nav-link text-white/85 text-sm font-semibold hover:text-neon transition-colors cursor-none">Kontak</a>
+      </li>
+    </ul>
+    <div class="flex items-center gap-3 md:gap-4">
+      <!-- Dark mode toggle -->
+      <button id="dm-btn" class="dm-toggle hidden md:block" aria-label="Toggle dark mode"></button>
+      <a href="/dokumen/CV_RofiqSyaifurrohman.pdf" target="_blank"
+        class="border-2 border-white/25 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase px-4 py-2 md:px-5 md:py-2.5 rounded-full hover:bg-neon hover:border-neon hover:text-ink transition-all cursor-none hover:shadow-neon">
+        Download CV
+      </a>
+      <button id="ham" aria-label="Menu" aria-expanded="false"
+        class="ham md:hidden flex flex-col gap-[6px] p-2 cursor-none z-[110] relative ml-1">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div id="mob-menu"
+    class="mob-menu fixed inset-0 z-[105] bg-ink/97 backdrop-blur-2xl flex flex-col items-center justify-center gap-8">
+    <a href="#hero"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Beranda</a>
+    <a href="#about"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Tentang
+      Saya</a>
+    <a href="#skills"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Skills</a>
+    <a href="#portfolio"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Portofolio</a>
+    <a href="#pengalaman"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Pendidikan</a>
+    <a href="#kontak"
+      class="mob-lnk text-white text-4xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">Kontak</a>
+    <button id="dm-btn-mob" class="dm-toggle mt-4" aria-label="Toggle dark mode"></button>
+  </div>
+
+  <!-- SIDE SOCIAL BAR -->
+  <aside id="sidebar"
+    class="desktop-only fixed left-0 top-1/2 -translate-y-1/2 z-[90] flex flex-col gap-1 py-5 px-2 bg-white/[.07] backdrop-blur-xl border-r border-white/10 rounded-r-2xl">
+    <a href="https://instagram.com/rofiqsyf" target="_blank" rel="noopener" aria-label="Instagram"
+      class="sidebar-link flex items-center justify-center w-11 h-11 rounded-xl text-white/60 hover:bg-neon hover:text-ink hover:shadow-neon transition-all cursor-none">
+      <svg class="w-[20px] h-[20px] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+      </svg>
+      <span class="tip">Instagram</span>
+    </a>
+    <a href="https://linkedin.com/in/rofiq-syaifurrohman" target="_blank" rel="noopener" aria-label="LinkedIn"
+      class="sidebar-link flex items-center justify-center w-11 h-11 rounded-xl text-white/60 hover:bg-neon hover:text-ink hover:shadow-neon transition-all cursor-none">
+      <svg class="w-[20px] h-[20px] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      </svg>
+      <span class="tip">LinkedIn</span>
+    </a>
+    <a href="https://github.com/rofiqsyf" target="_blank" rel="noopener" aria-label="GitHub"
+      class="sidebar-link flex items-center justify-center w-11 h-11 rounded-xl text-white/60 hover:bg-neon hover:text-ink hover:shadow-neon transition-all cursor-none">
+      <svg class="w-[20px] h-[20px] fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+      </svg>
+      <span class="tip">GitHub</span>
+    </a>
+    <a href="mailto:rofiqsyaifurrohman@gmail.com" aria-label="Email"
+      class="sidebar-link flex items-center justify-center w-11 h-11 rounded-xl bg-neon text-ink shadow-neon hover:bg-white transition-all cursor-none mt-1">
+      <span class="material-symbols-outlined text-[20px]">mail</span>
+      <span class="tip">Email</span>
+    </a>
+  </aside>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section id="hero"
+      class="relative min-h-screen bg-electric flex flex-col items-center justify-center overflow-hidden pt-20">
+      <div class="hero-grid absolute inset-0 pointer-events-none"></div>
+      <canvas id="pc" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+      <!-- Floating Cards -->
+      <div
+        class="glass-card absolute top-[10%] md:top-[14%] right-[2%] md:right-[12%] rounded-2xl p-3 md:p-4 flex flex-col items-center gap-2 animate-float-slow pointer-events-none scale-75 md:scale-100"
+        style="rotate:5deg">
+        <img src="/foto/opiq_pancasila.jpg" alt="Rofiq avatar"
+          class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-white/30" />
+        <span class="text-white text-xs font-bold">ROFIQ</span>
+        <span class="text-white/50 text-[10px] font-bold uppercase tracking-widest">Undergraduate</span>
+      </div>
+      <div
+        class="glass-card absolute bottom-[15%] md:bottom-[28%] left-[2%] md:left-[10%] rounded-2xl p-2 md:p-3 flex items-center gap-2 md:gap-3 animate-float-mid pointer-events-none scale-75 md:scale-100"
+        style="rotate:-3deg">
+        <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-neon flex items-center justify-center shrink-0">
+          <span class="material-symbols-outlined text-ink text-[16px] md:text-[18px]">palette</span>
+        </div>
+        <div>
+          <div class="text-white text-xs md:text-sm font-bold leading-none">Ngedesain</div>
+          <div class="text-white/50 text-[9px] md:text-[10px] mt-0.5">TUKANG REVISI</div>
+        </div>
+      </div>
+      <div
+        class="glass-card absolute top-[20%] md:top-[32%] left-[2%] md:left-[7%] rounded-2xl px-3 md:px-4 py-2 md:py-3 animate-float-fast pointer-events-none scale-75 md:scale-100 text-center z-10"
+        style="rotate:1deg">
+        <div class="text-neon text-xl md:text-2xl font-extrabold leading-none">6+</div>
+        <div class="text-white/50 text-[9px] md:text-[10px] font-bold uppercase tracking-widest mt-1">Bidang Skill</div>
+      </div>
+      <div
+        class="glass-card absolute top-[48%] md:top-[55%] right-[2%] md:right-[18%] rounded-2xl px-3 md:px-4 py-2 md:py-3 animate-float-mid pointer-events-none scale-75 md:scale-100 text-left flex items-center gap-3 z-20"
+        style="rotate:8deg">
+        <div class="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-neon/10 flex items-center justify-center shrink-0 border border-neon/30">
+          <span class="material-symbols-outlined text-neon text-[18px] md:text-[20px]">code</span>
+        </div>
+        <div>
+          <div class="text-white text-xs md:text-sm font-bold leading-none">Ngoding</div>
+          <div class="text-white/50 text-[9px] md:text-[10px] uppercase tracking-widest mt-1">TUKANG DEBUG</div>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 text-center px-5 md:px-16 max-w-[1280px] mx-auto w-full">
+        <div
+          class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-5 py-2 mb-10 cursor-none hover:bg-white/20 transition-colors">
+          <span class="w-2 h-2 rounded-full bg-neon animate-pulse-glow"></span>
+          <span class="text-white text-xs font-bold tracking-[.12em] uppercase">Mahasiswa Teknik Informatika</span>
+        </div>
+        <div class="select-none relative">
+          <h1
+            class="glitch text-[clamp(3rem,8vw,7rem)] font-extrabold leading-[.92] tracking-[-0.04em] text-neon text-neon-glow block"
+            data-text="Portofolio">PORTOFOLIO</h1>
+          <div class="text-[clamp(3.5rem,11vw,10rem)] font-extrabold text-white leading-[.88] tracking-[-0.04em] block">
+            ROFIQ</div>
+          <div
+            class="text-[clamp(2rem,7vw,6.5rem)] font-extrabold text-white leading-[.95] tracking-[-0.03em] block mt-1">
+            SYAIFURROHMAN</div>
+        </div>
+        <div class="flex items-center justify-center gap-2.5 mt-8 text-base md:text-lg">
+          <span class="text-white/50 font-medium">Saya seorang</span>
+          <span id="tw" class="text-neon font-bold min-w-[190px] text-left"></span>
+          <span class="tw-cursor"></span>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-10">
+          <a href="#portfolio"
+            class="btn-neon inline-flex items-center gap-2.5 bg-neon text-ink text-xs font-extrabold tracking-widest uppercase px-8 py-4 rounded-full cursor-none">
+            <span class="material-symbols-outlined text-[18px]">grid_view</span><span>Lihat Karya</span>
+          </a>
+          <a href="#kontak"
+            class="btn-neon inline-flex items-center gap-2.5 bg-white text-ink text-xs font-extrabold tracking-widest uppercase px-8 py-4 rounded-full cursor-none hover:bg-neon hover:text-ink transition-all shadow-lg">
+            <span class="material-symbols-outlined text-[18px]">mail</span>Hubungi Saya
+          </a>
+        </div>
+      </div>
+
+
+    </section>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div class="bg-neon overflow-hidden py-3 relative z-10">
+      <div class="mq-track text-ink font-extrabold text-sm uppercase tracking-widest whitespace-nowrap">
+        <span class="mx-8">Frontend Development</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">UI/UX Design</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Network Engineering</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Problem Solving</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Open to Collaborate</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">JUARA</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Frontend Development</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">UI/UX Design</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Network Engineering</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Problem Solving</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">Open to Collaborate</span><span class="mx-4 opacity-40">◆</span>
+        <span class="mx-8">JUARA</span><span class="mx-4 opacity-40">◆</span>
+      </div>
+    </div>
+
+    <!-- ===================== SKILLS ===================== -->
+    <section id="skills" class="relative bg-surface py-[120px] px-8 md:px-16 overflow-hidden">
+      <div id="sbg" class="absolute inset-0 pointer-events-none transition-transform duration-150"
+        style="background-image:linear-gradient(rgba(163,230,53,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.07) 1px,transparent 1px);background-size:40px 40px;">
+      </div>
+      <div class="relative z-10 max-w-[1280px] mx-auto">
+        <div class="text-center mb-16 reveal">
+          <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Keahlian Saya</span></div>
+          <h2 class="text-4xl md:text-[3.5rem] font-extrabold text-ink tracking-tight leading-tight">Apa yang
+            bisa<br>saya <span class="text-electric relative inline-block">lakukan<span
+                class="absolute -bottom-1 left-0 right-0 h-1 bg-neon rounded-full"></span></span></h2>
+          <p class="text-on-muted mt-4 text-lg max-w-xl mx-auto">Enam bidang utama yang saya kuasai dan terus kembangkan
+          </p>
+        </div>
+        <!-- Cards — Desktop: 3-col grid | Mobile: touch carousel -->
+        <div class="relative mb-20 reveal">
+
+          <!-- ── Carousel wrapper (mobile: 1-col, desktop: 3-col) ── -->
+          <div class="sc-carousel">
+            <div class="sc-track" id="sc-track">
+
+              <!-- Slide 1 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">code</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">Frontend</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Membangun antarmuka web yang responsif, cepat, dan estetis menggunakan teknologi modern.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">HTML5</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">CSS3</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">JavaScript</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">palette</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">UI/UX Design</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Merancang pengalaman pengguna yang intuitif dengan tampilan visual yang memukau dan fungsional.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Figma</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">UI/UX</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Prototyping</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">router</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">Computer Network</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Konfigurasi dan manajemen jaringan komputer skala kecil-menengah dengan berbagai perangkat.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Cisco</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">MikroTik</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Topology</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">brush</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">Graphic Design</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Membuat desain visual kreatif mulai dari logo, feed, hingga identitas brand yang berkesan.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">CorelDraw</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Figma</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Canva</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 5 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">analytics</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">Data Analyst</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Mengolah dan memvisualisasikan data menjadi insight yang bermakna untuk pengambilan keputusan.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Python</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Excel</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Tableau</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 6 -->
+              <div class="sc-slide">
+                <div class="service-card tilt bg-white rounded-3xl p-10 shadow-ambient flex flex-col items-center text-center cursor-none h-full">
+                  <div class="service-icon-wrap w-[72px] h-[72px] rounded-2xl bg-gradient-to-br from-electric to-electric-deep flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-neon text-[32px]">memory</span>
+                  </div>
+                  <h3 class="text-xl font-extrabold uppercase text-ink mb-2 tracking-tight">Computer Engineering</h3>
+                  <p class="text-on-muted text-sm leading-relaxed mb-8">Memahami arsitektur komputer, hardware, dan sistem embedded untuk solusi teknologi yang optimal.</p>
+                  <div class="mt-auto flex gap-2 flex-wrap justify-center">
+                    <span class="bg-electric text-white text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Hardware</span>
+                    <span class="bg-neon text-ink text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Operating System</span>
+                    <span class="border border-outline-dim text-on-muted text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Troubleshooting</span>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /sc-track -->
+
+            <!-- Prev / Next arrows -->
+            <button class="sc-btn sc-prev" id="sc-prev" aria-label="Sebelumnya">
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button class="sc-btn sc-next" id="sc-next" aria-label="Berikutnya">
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+
+            <!-- Dot indicators -->
+            <div class="sc-dots" id="sc-dots">
+              <button class="sc-dot active" data-i="0" aria-label="Slide 1"></button>
+              <button class="sc-dot" data-i="1" aria-label="Slide 2"></button>
+              <button class="sc-dot" data-i="2" aria-label="Slide 3"></button>
+              <button class="sc-dot" data-i="3" aria-label="Slide 4"></button>
+              <button class="sc-dot" data-i="4" aria-label="Slide 5"></button>
+              <button class="sc-dot" data-i="5" aria-label="Slide 6"></button>
+            </div>
+          </div><!-- /sc-carousel -->
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TOOLS STACK ===================== -->
+    <section id="tools" class="bg-surface-low py-20 px-8 md:px-16">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Tech Stack</span></div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-ink tracking-tight">Tools yang Saya Gunakan</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 reveal">
+          <div class="tool-pill">
+            <div class="t-icon bg-white-100 text-black-600">🐍</div>Python
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-orange-100 text-orange-500">🌐</div>HTML5
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-blue-100 text-blue-500">📱</div>CSS3
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-yellow-100 text-yellow-600">⚡</div>JavaScript
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-purple-100 text-purple-600">✏️</div>Figma
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-red-100 text-red-500">📊</div>IBM SPSS
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-indigo-100 text-indigo-600">✨</div>Canva
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-sky-100 text-sky-600">🖧</div>Cisco
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-teal-100 text-teal-600">🔧</div>MikroTik
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-green-100 text-green-600">🧠</div>Google AI Studio
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-gray-100 text-gray-600">💻</div>Oracle VirtualBox
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-pink-100 text-pink-600">🎨</div>CorelDraw
+          </div>
+          <div class="tool-pill">
+            <div class="t-icon bg-amber-100 text-amber-600">🗄</div>Microsoft Office
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="bg-surface py-[120px] px-8 md:px-16">
+      <div class="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+        <div class="reveal from-l">
+          <div class="inline-flex items-center gap-2 mb-5"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Tentang Saya</span></div>
+          <h2 class="text-4xl md:text-5xl font-extrabold text-ink leading-tight tracking-tight mb-6">Mahasiswa<br><span
+              class="text-electric">Ambisius</span></h2>
+          <p class="text-on-muted text-base leading-relaxed mb-4">Saya adalah mahasiswa semester 4 di Program Studi
+            Teknik Informatika. Memiliki ketertarikan besar di bidang teknologi informasi, meliputi Web Development,
+            UI/UX Design, dan Analisa Data.</p>
+          <p class="text-on-muted text-base leading-relaxed mb-10">Berfokus pada pengembangan solusi digital yang
+            fungsional dan estetis, serta selalu bersemangat belajar teknologi terbaru untuk memberikan dampak nyata.
+          </p>
+          <div class="flex gap-8 md:gap-10 flex-wrap items-end">
+            <div>
+              <div class="text-4xl font-extrabold text-electric leading-none"><span class="counter"
+                  data-target="4">0</span><span class="text-2xl">+</span></div>
+              <div class="text-xs font-bold uppercase tracking-widest text-on-muted mt-1">Semester</div>
+            </div>
+            <div>
+              <div class="text-4xl font-extrabold text-electric leading-none"><span class="counter"
+                  data-target="10">0</span><span class="text-2xl">+</span></div>
+              <div class="text-xs font-bold uppercase tracking-widest text-on-muted mt-1">Proyek</div>
+            </div>
+            <div>
+              <div class="text-4xl font-extrabold text-electric leading-none"><span class="counter"
+                  data-target="6">0</span></div>
+              <div class="text-xs font-bold uppercase tracking-widest text-on-muted mt-1">Bidang Skill</div>
+            </div>
+            <div class="mt-6 md:mt-0 sm:ml-auto">
+              <a href="/dokumen/CV_RofiqSyaifurrohman.pdf" target="_blank" class="inline-flex items-center justify-center gap-2 bg-neon text-ink text-[11px] md:text-sm font-bold tracking-widest uppercase px-5 py-2.5 md:px-6 md:py-3 rounded-full hover:bg-electric hover:text-white transition-all cursor-none shadow-neon hover:-translate-y-1">
+                <span class="material-symbols-outlined text-[18px] md:text-[20px]">download</span>
+                Download CV
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="reveal from-r relative">
+          <!-- Lanyard 3D Physics Simulation -->
+          <div id="lanyard-container"
+            class="reveal absolute -top-16 md:-top-24 -right-10 md:right-4 z-30 w-64 h-[450px] pointer-events-none scale-[0.65] md:scale-100 origin-top-right">
+            <!-- Rope Canvas -->
+            <canvas id="lanyard-canvas" class="absolute top-0 left-0 w-full h-full z-20 pointer-events-none"></canvas>
+
+            <!-- ID Card -->
+            <div id="lanyard-card"
+              class="absolute top-0 left-0 w-[110px] h-[150px] bg-white rounded-xl p-1.5 shadow-2xl border border-outline-dim pointer-events-auto cursor-none z-30 transition-shadow hover:shadow-neon"
+              style="opacity: 0;">
+              <div
+                class="w-full h-full bg-surface-low rounded-lg overflow-hidden flex flex-col relative border border-outline-dim pointer-events-none">
+                <div class="absolute top-1.5 left-1/2 -translate-x-1/2 w-5 h-1 bg-white rounded-full z-20"></div>
+                <img src="/foto/opiq_balairung.jpg" alt="Opiq Photo" class="w-full h-[100px] object-cover pt-3 px-1"
+                  style="filter: grayscale(100%); pointer-events: none;">
+                <div class="flex-1 bg-electric text-center flex items-center justify-center mt-1 rounded-b-sm">
+                  <span class="text-white text-[9px] font-extrabold tracking-widest uppercase">OPIQ.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-card-inner bg-white rounded-3xl p-6 md:p-10 shadow-ambient relative overflow-hidden">
+            <div class="absolute -top-14 -right-14 w-44 h-44 bg-electric/5 rounded-full"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-neon/10 rounded-full blur-2xl"></div>
+            <div
+              class="inline-flex items-center gap-2 bg-surface-low border border-outline-dim rounded-full px-4 py-2 mb-6 relative">
+              <span class="w-2 h-2 rounded-full bg-neon animate-pulse-glow"></span>
+              <span class="text-ink text-xs font-bold tracking-widest uppercase">Open to Collaboration</span>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-ink leading-tight mb-4 relative">
+              Halo! Nama saya<br>
+              <span class="text-electric relative inline-block group cursor-none">Rofiq Syaifurrohman
+                <span
+                  class="absolute bottom-0 left-0 right-0 h-1 bg-neon rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+              </span>
+            </h3>
+            <p class="text-on-muted text-sm leading-relaxed mb-4 relative">Mahasiswa semester 4 Teknik Informatika.
+              Fokus pada Web Development, UI/UX Design, dan Analisa Data. Selalu berusaha
+              memberikan solusi digital yang terbaik.</p>
+            <div
+              class="inline-flex items-center gap-1.5 bg-neon/15 text-green-700 rounded-full px-4 py-1.5 text-xs font-bold">
+              <span class="material-symbols-outlined text-[14px]">star</span>Teknik Informatika — Universitas Sains
+              Al-Qur'an
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ACHIEVEMENTS ===================== -->
+    <section id="achievement" class="bg-surface-low py-[100px] px-8 md:px-16">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-14 reveal">
+          <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Prestasi</span></div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-ink tracking-tight">Pencapaian Saya</h2>
+        </div>
+        <div class="overflow-hidden cursor-grab py-12 -mx-8 px-8 md:-mx-16 md:px-16" id="achieve-wrapper">
+          <div class="flex gap-3 md:gap-4 w-max" id="achieve-track">
+            <!-- Card 1 -->
+            <div class="achieve-card tilt reveal d1 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
+              <div class="w-12 h-12 rounded-2xl bg-electric/10 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-electric text-2xl">emoji_events</span>
+              </div>
+              <div class="text-xs font-bold text-neon-dim uppercase tracking-widest mb-1">Akademik</div>
+              <h4 class="text-ink font-extrabold text-lg mb-2">IPK Baik</h4>
+              <p class="text-on-muted text-sm leading-relaxed">Meraih IPK yang memuaskan di semester 4 Program Studi Teknik Informatika UNSIQ.</p>
+            </div>
+            <!-- Card 2 -->
+            <div class="achieve-card tilt reveal d2 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
+              <div class="w-12 h-12 rounded-2xl bg-neon/15 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-green-700 text-2xl">verified</span>
+              </div>
+              <div class="text-xs font-bold text-neon-dim uppercase tracking-widest mb-1">Sertifikasi</div>
+              <h4 class="text-ink font-extrabold text-lg mb-2">Teknik Komputer & Jaringan</h4>
+              <p class="text-on-muted text-sm leading-relaxed">Lulusan jurusan TKJ SMK Negeri 1 Wonosobo dengan kompetensi jaringan.</p>
+            </div>
+            <!-- Card 3 (Fixed Icon) -->
+            <div class="achieve-card tilt reveal d3 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
+              <div class="w-12 h-12 rounded-2xl bg-electric/10 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-electric text-2xl">workspace_premium</span>
+              </div>
+              <div class="text-xs font-bold text-neon-dim uppercase tracking-widest mb-1">Sertifikasi</div>
+              <h4 class="text-ink font-extrabold text-lg mb-2">Desain Grafis</h4>
+              <p class="text-on-muted text-sm leading-relaxed">Lulusan pelatihan di Telkom Indonesia & BLK Wonosobo dengan kompetensi Desain Grafis.</p>
+            </div>
+            <!-- Card 4 -->
+            <div class="achieve-card tilt reveal d4 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
+              <div class="w-12 h-12 rounded-2xl bg-neon/15 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-green-700 text-2xl">design_services</span>
+              </div>
+              <div class="text-xs font-bold text-neon-dim uppercase tracking-widest mb-1">Desain</div>
+              <h4 class="text-ink font-extrabold text-lg mb-2">UI/UX Portfolio</h4>
+              <p class="text-on-muted text-sm leading-relaxed">Menyelesaikan berbagai proyek desain UI/UX dengan fokus pada user experience.</p>
+            </div>
+            <!-- Card 5 -->
+            <div class="achieve-card tilt reveal d1 w-[260px] md:w-[300px] shrink-0 bg-white p-6 rounded-3xl shadow-ambient border border-outline-dim/30">
+              <div class="w-12 h-12 rounded-2xl bg-electric/10 flex items-center justify-center mb-4">
+                <span class="material-symbols-outlined text-electric text-2xl">web</span>
+              </div>
+              <div class="text-xs font-bold text-neon-dim uppercase tracking-widest mb-1">Development</div>
+              <h4 class="text-ink font-extrabold text-lg mb-2">Web Projects</h4>
+              <p class="text-on-muted text-sm leading-relaxed">Membangun 10+ proyek web dengan HTML, CSS, dan JavaScript dari nol.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EDUCATION TIMELINE ===================== -->
+    <section id="pengalaman" class="relative grad-pengalaman py-[120px] px-8 md:px-16 overflow-hidden">
+      <div class="hero-grid absolute inset-0 opacity-[.06] pointer-events-none"></div>
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[100px] pointer-events-none">
+      </div>
+      <div class="max-w-[1280px] mx-auto relative z-10">
+        <div class="text-center mb-20 reveal">
+          <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-white/50 text-xs font-bold tracking-[.12em] uppercase">Perjalanan</span></div>
+          <h2 class="text-4xl md:text-[3.5rem] font-extrabold text-white tracking-tight uppercase">Pendidikan</h2>
+          <p class="text-white/60 mt-3 text-lg">Perjalanan akademik saya</p>
+        </div>
+        <div class="relative max-w-3xl mx-auto">
+          <div id="tll" class="tl-line absolute left-[1.25rem] md:left-1/2 -translate-x-px top-0 bottom-0 w-[2px]">
+          </div>
+          <!-- Item 1 -->
+          <div
+            class="relative grid grid-cols-[2.5rem_1fr] md:grid-cols-[1fr_2.5rem_1fr] items-center gap-x-5 mb-16 md:mb-20 reveal">
+            <div class="flex items-center justify-center md:col-start-2">
+              <div class="tl-dot w-6 h-6 rounded-full bg-neon border-4 border-electric z-10 shrink-0"></div>
+            </div>
+            <div
+              class="dark-glass rounded-2xl p-5 md:p-6 md:text-right cursor-none hover:scale-[1.03] transition-transform md:col-start-1 md:row-start-1">
+              <div class="text-neon text-xs font-extrabold tracking-widest uppercase mb-2">2021 – 2024</div>
+              <h3 class="text-white text-lg md:text-xl font-extrabold mb-1">SMK Negeri 1 Wonosobo</h3>
+              <p class="text-white/60 text-xs md:text-sm leading-relaxed">Jurusan Teknik Komputer dan Jaringan. Dasar
+                Jaringan,
+                Komputer, dan Troubleshooting.</p>
+              <span class="inline-block bg-white/10 text-white/70 text-xs font-bold px-3 py-1 rounded-full mt-2">Lulus
+                2024</span>
+            </div>
+            <div class="hidden md:block"></div>
+          </div>
+          <!-- Item 2 -->
+          <div
+            class="relative grid grid-cols-[2.5rem_1fr] md:grid-cols-[1fr_2.5rem_1fr] items-center gap-x-5 reveal d1">
+            <div class="hidden md:block"></div>
+            <div class="flex items-center justify-center">
+              <div class="tl-dot w-6 h-6 rounded-full bg-neon border-4 border-electric z-10 shrink-0"></div>
+            </div>
+            <div class="dark-glass rounded-2xl p-5 md:p-6 cursor-none hover:scale-[1.03] transition-transform">
+              <div class="text-neon text-xs font-extrabold tracking-widest uppercase mb-2">2024 – Sekarang</div>
+              <h3 class="text-white text-lg md:text-xl font-extrabold mb-1">S1 Teknik Informatika</h3>
+              <p class="text-white/60 text-xs md:text-sm leading-relaxed mb-3">Universitas Sains Al-Qur'an, Jawa Tengah.
+                Web
+                Development, UI/UX Design, Jaringan Komputer.</p>
+              <span class="inline-block bg-neon/20 text-neon text-xs font-extrabold px-3 py-1 rounded-full">IPK Baik
+                ⭐</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===================== PORTFOLIO ===================== -->
+    <section id="portfolio" class="grad-portfolio py-[120px] px-8 md:px-16">
+      <div class="max-w-[1280px] mx-auto">
+        <div class="text-center mb-12 reveal">
+          <div class="inline-flex items-center gap-2 mb-4"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-on-muted text-xs font-bold tracking-[.12em] uppercase">Karya Saya</span></div>
+          <h2 class="text-4xl md:text-[3.5rem] font-extrabold text-ink tracking-tight uppercase">Proyek Saya</h2>
+          <p class="text-on-muted mt-3 text-lg">Klik gambar untuk memperbesar — beberapa karya terbaik yang telah saya
+            buat</p>
+        </div>
+        <!-- Filter -->
+        <div class="flex justify-center gap-3 mb-10 flex-wrap reveal">
+          <button data-f="all"
+            class="fbtn active bg-electric text-white border-electric border-2 text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full cursor-none transition-all">Semua</button>
+          <button data-f="web"
+            class="fbtn bg-transparent text-on-muted border-2 border-outline-dim text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full cursor-none transition-all hover:border-electric hover:text-electric">Web
+            Dev</button>
+          <button data-f="design"
+            class="fbtn bg-transparent text-on-muted border-2 border-outline-dim text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full cursor-none transition-all hover:border-electric hover:text-electric">UI/UX</button>
+          <button data-f="network"
+            class="fbtn bg-transparent text-on-muted border-2 border-outline-dim text-xs font-bold tracking-widest uppercase px-5 py-2 rounded-full cursor-none transition-all hover:border-electric hover:text-electric">Network</button>
+        </div>
+        <!-- Grid -->
+        <div class="porto-grid reveal" id="pg">
+          <div class="porto-item" data-cat="design" data-title="Design Logo"
+            data-desc="Identitas visual brand — Corel Draw & Illustrator" data-img="foto/proyek-logo.png">
+            <img src="foto/proyek-logo.png" alt="Design Logo" />
+            <div class="porto-overlay">
+              <div class="pt text-neon text-[10px] font-bold uppercase tracking-widest">Corel Draw · Illustrator</div>
+              <h4 class="text-white font-extrabold text-lg uppercase tracking-widest mt-1">Design Logo</h4>
+              <p class="text-white/70 text-xs mt-1.5">Identitas visual brand yang kuat. Klik untuk perbesar.</p>
+            </div>
+          </div>
+          <div class="porto-item" data-cat="design" data-title="UI/UX Design"
+            data-desc="Perancangan tampilan aplikasi — Figma & Adobe XD" data-img="/foto/proyek_web.png">
+            <img src="/foto/proyek_web.png" alt="UI/UX Design" />
+            <div class="porto-overlay">
+              <div class="pt text-neon text-[10px] font-bold uppercase tracking-widest">Figma · Adobe XD</div>
+              <h4 class="text-white font-extrabold text-lg uppercase tracking-widest mt-1">UI/UX Design</h4>
+              <p class="text-white/70 text-xs mt-1.5">Tampilan website yang menarik dan mudah digunakan.</p>
+            </div>
+          </div>
+          <div class="porto-item" data-cat="network" data-title="Network Configuration"
+            data-desc="Konfigurasi jaringan — MikroTik & Cisco" data-img="/foto/proyek-network.jpg">
+            <img src="/foto/proyek-network.jpg" alt="Network" />
+            <div class="porto-overlay">
+              <div class="pt text-neon text-[10px] font-bold uppercase tracking-widest">MikroTik · Cisco</div>
+              <h4 class="text-white font-extrabold text-lg uppercase tracking-widest mt-1">Network Config</h4>
+              <p class="text-white/70 text-xs mt-1.5">Konfigurasi dan manajemen jaringan skala menengah.</p>
+            </div>
+          </div>
+          <div class="porto-item" data-cat="web" data-title="Web Development"
+            data-desc="Website responsif modern — HTML, CSS, JavaScript" data-img="/foto/proyek_uiux.png">
+            <img src="/foto/proyek_uiux.png" alt="Web Dev" />
+            <div class="porto-overlay">
+              <div class="pt text-neon text-[10px] font-bold uppercase tracking-widest">HTML · CSS · JS</div>
+              <h4 class="text-white font-extrabold text-lg uppercase tracking-widest mt-1">Web Development</h4>
+              <p class="text-white/70 text-xs mt-1.5">Website responsif yang cepat dan modern.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section id="kontak" class="relative bg-ink py-[120px] px-8 md:px-16 overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none"
+        style="background-image:linear-gradient(rgba(163,230,53,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(163,230,53,.04) 1px,transparent 1px);background-size:40px 40px; mask-image: linear-gradient(to bottom, transparent, black 15%); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%);">
+      </div>
+      <div
+        class="absolute top-16 right-0 w-[500px] h-[500px] bg-electric/15 rounded-full blur-[120px] pointer-events-none translate-x-1/3">
+      </div>
+      <div
+        class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-neon/7 rounded-full blur-[100px] pointer-events-none translate-y-1/2 -translate-x-1/3">
+      </div>
+      <div class="max-w-[1280px] mx-auto relative z-10 grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+        <div class="reveal from-l">
+          <div class="inline-flex items-center gap-2 mb-5"><span class="w-5 h-0.5 bg-neon rounded-full"></span><span
+              class="text-white/50 text-xs font-bold tracking-[.12em] uppercase">Hubungi Saya</span></div>
+          <h2 class="text-5xl md:text-[4rem] font-extrabold text-white tracking-tight leading-[1.05] mb-6">Mari<br><span
+              class="text-neon">Terhubung</span></h2>
+          <p class="text-white/60 text-base leading-relaxed mb-10 max-w-md">Saya terbuka untuk diskusi, kolaborasi
+            proyek, atau sekadar berbagi ide seputar teknologi. Jangan ragu untuk menghubungi saya!</p>
+          <div class="space-y-5">
+            <div class="flex items-center gap-4 group cursor-none">
+              <div
+                class="w-12 h-12 rounded-xl bg-white/6 border border-white/10 flex items-center justify-center group-hover:bg-neon group-hover:border-neon transition-all">
+                <span
+                  class="material-symbols-outlined text-white/70 text-[20px] group-hover:text-ink transition-colors">mail</span>
+              </div>
+              <div>
+                <div class="text-white/40 text-[10px] font-bold uppercase tracking-widest">Email</div>
+                <div class="text-white font-semibold text-sm group-hover:text-neon transition-colors">
+                  rofiqsyaifurrohman@gmail.com</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 group cursor-none">
+              <div
+                class="w-12 h-12 rounded-xl bg-white/6 border border-white/10 flex items-center justify-center group-hover:bg-neon group-hover:border-neon transition-all">
+                <span
+                  class="material-symbols-outlined text-white/70 text-[20px] group-hover:text-ink transition-colors">location_on</span>
+              </div>
+              <div>
+                <div class="text-white/40 text-[10px] font-bold uppercase tracking-widest">Lokasi</div>
+                <div class="text-white font-semibold text-sm group-hover:text-neon transition-colors">Wonosobo, Jawa
+                  Tengah</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 group cursor-none">
+              <div
+                class="w-12 h-12 rounded-xl bg-white/6 border border-white/10 flex items-center justify-center group-hover:bg-neon group-hover:border-neon transition-all">
+                <span
+                  class="material-symbols-outlined text-white/70 text-[20px] group-hover:text-ink transition-colors">school</span>
+              </div>
+              <div>
+                <div class="text-white/40 text-[10px] font-bold uppercase tracking-widest">Perguruan Tinggi</div>
+                <div class="text-white font-semibold text-sm group-hover:text-neon transition-colors">Universitas Sains Al-Qur'an
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal from-r">
+          <div class="dark-glass rounded-3xl p-8 md:p-10 relative overflow-hidden">
+            <div
+              class="absolute top-0 right-0 w-28 h-28 bg-neon/8 rounded-full blur-2xl -mr-8 -mt-8 pointer-events-none">
+            </div>
+            <form id="cform" action="https://formspree.io/f/mdkarqkp" method="POST" class="flex flex-col gap-5 relative z-10">
+              <div class="flex flex-col gap-1.5">
+                <label for="name" class="text-white text-sm font-bold">Nama Lengkap</label>
+                <input type="text" id="name" name="name" placeholder="Minimal 3 karakter" required minlength="3"
+                  class="w-full rounded-xl px-4 py-3 text-sm font-bold text-ink bg-white border-2 border-transparent focus:border-neon focus:ring-4 focus:ring-neon/20 transition-all outline-none placeholder:text-ink/40" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="email" class="text-white text-sm font-bold">Alamat Email</label>
+                <input type="email" id="email" name="email" placeholder="email@contoh.com" required
+                  class="w-full rounded-xl px-4 py-3 text-sm font-bold text-ink bg-white border-2 border-transparent focus:border-neon focus:ring-4 focus:ring-neon/20 transition-all outline-none placeholder:text-ink/40" />
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="topic" class="text-white text-sm font-bold">Topik Pesan</label>
+                <select id="topic" name="topic" required
+                  class="w-full rounded-xl px-4 py-3 text-sm font-bold text-ink bg-white border-2 border-transparent focus:border-neon focus:ring-4 focus:ring-neon/20 transition-all outline-none appearance-none cursor-pointer">
+                  <option value="" disabled selected class="text-ink/50">— Pilih topik —</option>
+                  <option value="kolaborasi" class="text-ink">Kolaborasi Proyek</option>
+                  <option value="pertanyaan" class="text-ink">Pertanyaan Umum</option>
+                  <option value="magang" class="text-ink">Tawaran Magang</option>
+                  <option value="lainnya" class="text-ink">Lainnya</option>
+                </select>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="message" class="text-white text-sm font-bold">Pesan</label>
+                <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini... (Minimal 20 karakter)" required
+                  minlength="20"
+                  class="w-full rounded-xl px-4 py-3 text-sm font-bold text-ink bg-white border-2 border-transparent focus:border-neon focus:ring-4 focus:ring-neon/20 transition-all outline-none placeholder:text-ink/40 h-28 resize-none"></textarea>
+              </div>
+              <button type="submit" id="sbtn"
+                class="btn-neon w-full bg-neon text-ink font-extrabold text-xs tracking-widest uppercase py-4 rounded-xl flex items-center justify-center gap-2.5 cursor-none mt-1">
+                <span>Kirim Pesan</span><span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+              </button>
+              <div id="smsg" class="hidden text-center text-neon font-bold text-sm py-2">✅ Pesan berhasil dikirim! Terima kasih sudah menghubungi.</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-ink border-t border-white/6 py-8 px-8 md:px-16">
+    <div class="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6 flex-wrap">
+      <a href="#hero"
+        class="text-white text-2xl font-extrabold tracking-tight hover:text-neon transition-colors cursor-none">OPIQ.</a>
+      <div class="flex gap-8">
+        <a href="https://github.com/rofiqsyf" target="_blank" rel="noopener"
+          class="text-white/50 text-sm font-medium hover:text-neon transition-colors cursor-none">GitHub</a>
+        <a href="https://linkedin.com/in/rofiq-syaifurrohman" target="_blank" rel="noopener"
+          class="text-white/50 text-sm font-medium hover:text-neon transition-colors cursor-none">LinkedIn</a>
+        <a href="https://instagram.com/rofiqsyf" target="_blank" rel="noopener"
+          class="text-white/50 text-sm font-medium hover:text-neon transition-colors cursor-none">Instagram</a>
+      </div>
+      <div class="text-neon text-xs font-extrabold tracking-widest uppercase">© 2026 Rofiq Syaifurrohman · Dibuat dengan ❤️
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="main.js"></script>
+  <script src="lanyard.js"></script>
+</body>
+
+</html>
