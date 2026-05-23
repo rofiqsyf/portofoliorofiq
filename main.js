@@ -4,29 +4,43 @@
     /* ── CURSOR & TRAIL ── */
     const cur = document.getElementById('cur'), ring = document.getElementById('cur-ring');
     let mx = 0, my = 0, rx = 0, ry = 0;
+    /* Detect touch device — disable custom cursor entirely on mobile */
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (isTouchDevice) {
+      if (cur) cur.style.display = 'none';
+      if (ring) ring.style.display = 'none';
+      document.body.style.cursor = 'auto';
+    }
     const trails = Array.from({ length: 8 }, () => { const d = document.createElement('div'); d.className = 'cur-trail'; document.body.appendChild(d); return { el: d, x: 0, y: 0 }; });
+    if (isTouchDevice) {
+      trails.forEach(t => t.el.style.display = 'none');
+    }
     const updateCursor = (e) => {
-      mx = e.clientX || (e.touches && e.touches[0].clientX) || mx;
-      my = e.clientY || (e.touches && e.touches[0].clientY) || my;
-      cur.style.cssText += `left:${mx}px;top:${my}px`;
+      if (isTouchDevice) return;
+      mx = e.clientX || mx;
+      my = e.clientY || my;
+      if (cur) cur.style.cssText += `left:${mx}px;top:${my}px`;
     };
     document.addEventListener('mousemove', updateCursor);
-    document.addEventListener('touchmove', updateCursor, { passive: true });
     (function raf() {
-      rx += (mx - rx) * .12; ry += (my - ry) * .12;
-      ring.style.cssText = `left:${rx}px;top:${ry}px`;
-      trails.forEach((t, i) => {
-        const prev = i === 0 ? { x: mx, y: my } : trails[i - 1];
-        t.x += (prev.x - t.x) * (0.35 - i * .03);
-        t.y += (prev.y - t.y) * (0.35 - i * .03);
-        t.el.style.cssText = `left:${t.x}px;top:${t.y}px;opacity:${(8 - i) / 14};width:${6 - i * .5}px;height:${6 - i * .5}px`;
-      });
+      if (!isTouchDevice) {
+        rx += (mx - rx) * .12; ry += (my - ry) * .12;
+        if (ring) ring.style.cssText = `left:${rx}px;top:${ry}px`;
+        trails.forEach((t, i) => {
+          const prev = i === 0 ? { x: mx, y: my } : trails[i - 1];
+          t.x += (prev.x - t.x) * (0.35 - i * .03);
+          t.y += (prev.y - t.y) * (0.35 - i * .03);
+          t.el.style.cssText = `left:${t.x}px;top:${t.y}px;opacity:${(8 - i) / 14};width:${6 - i * .5}px;height:${6 - i * .5}px`;
+        });
+      }
       requestAnimationFrame(raf);
     })();
-    document.querySelectorAll('a,button,.porto-item').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('cur-big'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('cur-big'));
-    });
+    if (!isTouchDevice) {
+      document.querySelectorAll('a,button,.porto-item').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cur-big'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cur-big'));
+      });
+    }
 
     /* ── SCROLL PROGRESS ── */
     const prog = document.getElementById('prog');
@@ -142,15 +156,17 @@
     window.addEventListener('scroll', () => { if (tll && tll.getBoundingClientRect().top < window.innerHeight * .75) tll.classList.add('go'); }, { passive: true });
 
     /* ── 3D TILT CARDS ── */
-    document.querySelectorAll('.tilt').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - .5;
-        const y = (e.clientY - r.top) / r.height - .5;
-        card.style.transform = `perspective(600px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) scale(1.02)`;
+    if (!isTouchDevice) {
+      document.querySelectorAll('.tilt').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - .5;
+          const y = (e.clientY - r.top) / r.height - .5;
+          card.style.transform = `perspective(600px) rotateX(${-y * 10}deg) rotateY(${x * 10}deg) scale(1.02)`;
+        });
+        card.addEventListener('mouseleave', () => card.style.transform = '');
       });
-      card.addEventListener('mouseleave', () => card.style.transform = '');
-    });
+    }
 
     /* ── PORTFOLIO FILTER ── */
     document.querySelectorAll('.fbtn').forEach(btn => {
