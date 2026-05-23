@@ -18,8 +18,8 @@ class LanyardSimulation {
     if (!this.canvas || !this.card || !this.container) return;
     
     this.points = [];
-    this.segmentCount = 12;
-    this.segmentLength = 12;
+    // Adapt rope to container size (shorter on mobile)
+    this.updateRopeParams();
     this.gravity = 0.6;
     this.friction = 0.96;
     this.bounce = 0.5;
@@ -29,7 +29,7 @@ class LanyardSimulation {
     this.triggered = false;
     
     this.resize();
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener('resize', () => { this.updateRopeParams(); this.resize(); this.initPoints(); });
     
     const handleMove = (e) => {
       if (!this.triggered) return;
@@ -51,9 +51,25 @@ class LanyardSimulation {
 
     this.card.addEventListener('mouseenter', () => this.isHoveringCard = true);
     this.card.addEventListener('mouseleave', () => this.isHoveringCard = false);
+    // Touch: treat touchstart/end as hover-equivalent for mobile interaction
+    this.card.addEventListener('touchstart', () => this.isHoveringCard = true, { passive: true });
+    this.card.addEventListener('touchend',   () => this.isHoveringCard = false, { passive: true });
     
     this.initPoints();
     this.loop();
+  }
+
+  updateRopeParams() {
+    const h = this.container.offsetHeight || 280;
+    if (h < 350) {
+      // Mobile / compact container
+      this.segmentCount  = 8;
+      this.segmentLength = 10;
+    } else {
+      // Desktop
+      this.segmentCount  = 12;
+      this.segmentLength = 12;
+    }
   }
   
   resize() {
