@@ -972,8 +972,8 @@
       /* smooth slide animation */
       transition: transform .45s cubic-bezier(.5, 0, 0, 1);
       will-change: transform;
-      /* peek 10% of next card on either side */
-      padding: 8px 10% 8px;
+      /* peek 10% of next card on either side, larger vertical padding to prevent clipping */
+      padding: 24px 10% 24px;
     }
 
     .sc-slide {
@@ -990,7 +990,7 @@
         padding-right: 12px;
       }
       .sc-track {
-        padding: 8px 0;
+        padding: 24px 0;
       }
       .sc-slide {
         /* 3 cards per view, gap 16px: calc((100% - 32px) / 3) */
